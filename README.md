@@ -1,16 +1,74 @@
-# React + Vite
+# MascotasApp - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada con React + Vite para gestionar mascotas y sus comentarios, consumiendo la API de MascotasApp.
 
-Currently, two official plugins are available:
+## Dependencias principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React** - Framework de UI
+- **Vite** - Herramienta de build y desarrollo
+- **React Router** - Enrutamiento del lado del cliente
+- **Axios** - Cliente HTTP para consumir la API
 
-## React Compiler
+## Estructura del proyecto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+mascotas-front/
+├── src/
+│   ├── api/
+│   │   └── api.js                  # Instancia de Axios (conexión con la API)
+│   ├── components/
+│   │   ├── mascotas/
+│   │   │   ├── MascotasList.jsx    # Listado de mascotas
+│   │   │   ├── MascotasDetail.jsx  # Detalle de una mascota
+│   │   │   └── MascotasForm.jsx    # Formulario para registrar/editar mascota
+│   │   └── comentarios/
+│   │       └── Comentarios.jsx     # Gestión de comentarios (agregar/eliminar)
+│   ├── pages/
+│   │   └── MascotasPage.jsx        # Página principal de mascotas
+│   └── App.jsx                     # Rutas y navegación
+```
 
-## Expanding the ESLint configuration
+## Instrucciones de ejecución
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Construir para producción
+npm run build
+
+# Vista previa de la producción
+npm run preview
+
+# Ejecutar linter
+npm run lint
+```
+
+La aplicación estará disponible en `http://localhost:5173`.
+
+## Funcionalidades implementadas
+
+### Conexión con la API
+- Instancia de Axios configurada apuntando a `https://vrodriguezvc.pythonanywhere.com/api/`
+
+### Gestión de mascotas
+- **Listar mascotas** (GET `/api/mascotas/`) - Muestra información principal: nombre, imagen, descripción, edad y raza
+- **Ver detalle de mascota** (GET `/api/mascotas/{id}/`) - Muestra toda la información incluyendo error 404 si no se encuentra
+- **Registrar mascota** (POST `/api/mascotas/`) - Formulario con carga de imagen mediante FormData, incluye selección de estado, tipo, sexo y tamaño desde la API
+
+### Gestión de comentarios
+- **Agregar comentario** (POST) - Formulario para agregar un comentario a una mascota con autor y contenido
+- **Eliminar comentario** (DELETE) - Botón de eliminación con confirmación del usuario
+
+### Manejo de errores
+- Manejo de errores en todas las peticiones utilizando `error.response?.status` y `error.response?.data`
+- Diferenciación en la interfaz de errores 400 (validación con mensajes detallados por campo) y 404 (no encontrado)
+
+## Herramientas de IA utilizadas
+
+- **OpenCode (big-pickle)** - Se utilizó como asistente de desarrollo para:
+  - Revisión y documentación de la estructura del proyecto
+  - Documentación de funcionalidades en el README

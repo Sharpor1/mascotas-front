@@ -50,7 +50,16 @@ function MascotasForm({ onAdd }) {
         formData.append("tamano", selectedTamano);
         formData.append("imagen", imagen);
 
-        onAdd(formData);
+        if (imagen) {
+            formData.append("imagen", imagen);
+        }
+
+        if (mascota && onUpdate) {
+            onUpdate(mascota.id, formData);
+            onCancel();
+        } else {
+            onAdd(formData);
+        }
     }
 
     return (
@@ -103,7 +112,8 @@ function MascotasForm({ onAdd }) {
                 <input type="file" onChange={(e) => setImagen(e.target.files[0])} />
             </label>
 
-            <button type="submit">Guardar</button>
+            <button type="submit">{mascota ? "Actualizar" : "Guardar"}</button>
+            {mascota && <button type="button" onClick={onCancel}>Cancelar</button>}
         </form>
     )
 }
