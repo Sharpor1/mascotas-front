@@ -59,6 +59,8 @@ La aplicación estará disponible en `http://localhost:5173`.
 - **Ver detalle de mascota** (GET `/api/mascotas/{id}/`) - Muestra toda la información incluyendo error 404 si no se encuentra
 - **Registrar mascota** (POST `/api/mascotas/`) - Formulario con carga de imagen mediante FormData, incluye selección de estado, tipo, sexo y tamaño desde la API
 
+- **Editar mascota** - Abre el formulario con la información ya cargada de la mascota a editar.
+
 ### Gestión de comentarios
 - **Agregar comentario** (POST) - Formulario para agregar un comentario a una mascota con autor y contenido
 - **Eliminar comentario** (DELETE) - Botón de eliminación con confirmación del usuario
