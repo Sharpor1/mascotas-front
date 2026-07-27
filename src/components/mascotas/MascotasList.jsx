@@ -19,7 +19,7 @@ function MascotasList({ lista, onAdd, onChange }) {
 
     const handleUpdateMascota = async (id, mascota) => {
         try {
-            await mascotasApi.patch(`/mascotas/${id}`, mascota);
+            await mascotasApi.patch(`/mascotas/${id}/`, mascota);
             setError(null);
             setEditarMascota(null);
         } catch (error) {
@@ -38,7 +38,7 @@ function MascotasList({ lista, onAdd, onChange }) {
     const handleEliminarMascota = async (id) => {
         if(!window.confirm('¿Estas seguro que quieres eliminar esta mascota?')) return;
         try {
-            await mascotasApi.delete(`/mascotas/${id}`);
+            await mascotasApi.delete(`/mascotas/${id}/`);
             setError(null);
         } catch (error) {
             if (error.reponse?.status === 404) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import mascotasApi from "../../api/api";
 
-function MascotasForm({ onAdd }) {
+function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     const [estados, setEstados] = useState([]);
     const [tipoMascota, setTipoMascota] = useState([]);
     const [sexo, setSexo] = useState([]);
@@ -48,8 +48,6 @@ function MascotasForm({ onAdd }) {
         formData.append("tipo_animal", selectedTipoMascota);
         formData.append("sexo", selectedSexo);
         formData.append("tamano", selectedTamano);
-        formData.append("imagen", imagen);
-
         if (imagen) {
             formData.append("imagen", imagen);
         }
