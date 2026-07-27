@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import mascotasApi from "../../api/api";
 import { useEffect, useState } from "react";
+import Comentarios from "../comentarios/Comentarios";
 
 function MascotasDetail() {
     const { id } = useParams();
@@ -13,6 +14,8 @@ function MascotasDetail() {
             const response = await mascotasApi.get(`mascotas/${id}/`);
             console.log(response.data);
             setMascota(response.data);
+            setFetchError(false);
+            
         } catch (error) {
             console.log(error);
             setFetchError(true);
@@ -21,7 +24,7 @@ function MascotasDetail() {
 
     useEffect(() => {
         fetchMascotaDetail();
-    }, []);
+    }, [id]);
 
     return (
         <div>
@@ -34,6 +37,11 @@ function MascotasDetail() {
                     <p>{mascota?.descripcion}</p>
                     <p>Edad: {mascota?.edad}</p>
                     <p>Raza: {mascota?.raza}</p>
+                    <Comentarios
+                        mascotaId={id}
+                        comentarios={mascota?.comentarios}
+                        onRefresh={fetchMascotaDetail}
+                    />
                 </>
             )}
         </div>
