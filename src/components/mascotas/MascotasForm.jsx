@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import mascotasApi from "../../api/api";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     const [estados, setEstados] = useState([]);
@@ -74,95 +75,153 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     }
 
     return (
-        <form class="mb-3" onSubmit={handleSubmit} encType="multipart/form-data">
-            <label>Nombre:
-                <input class="form-control form-control-lg"
-                placeholder="Spike"
-                aria-label=".form-control-lg example"
-                type="text"
-                value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            </label>
+        <div className="container my-4">
+            <div className="card shadow-sm mx-auto" style={{ maxWidth: '800px' }}>
+                <div className="card-header">
+                    <h4 className="card-title mb-0">
+                        {mascota ? "Editar Mascota" : "Registrar Mascota"}
+                    </h4>
+                </div>
+                
+                <div className="card-body p-4">
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
+                        <div className="row g-3">
+                            
+                            <div className="col-md-6">
+                                <label className="form-label fw-semibold">Nombre:</label>
+                                <input 
+                                    className="form-control"
+                                    placeholder="Spike"
+                                    type="text"
+                                    value={nombre} 
+                                    onChange={(e) => setNombre(e.target.value)} 
+                                />
+                            </div>
 
-            <label>Descripcion:
-                <textarea class="form-control form-control-lg"
-                placeholder="Pelaje rubio"
-                aria-label=".form-control-lg example"
-                value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
-            </label>
+                            
+                            <div className="col-md-6">
+                                <label className="form-label fw-semibold">Edad:</label>
+                                <input 
+                                    className="form-control" 
+                                    placeholder="Ej: 2"
+                                    type="number"
+                                    value={edad} 
+                                    onChange={(e) => setEdad(e.target.value)} 
+                                />
+                            </div>
 
-            <label>Edad:
-                <input class="form-control form-control-lg" placeholder="2 años"
-                aria-label=".form-control-lg example"
-                type="number"
-                value={edad} onChange={(e) => setEdad(e.target.value)} />
-            </label>
+                            
+                            <div className="col-md-6">
+                                <label className="form-label fw-semibold">Raza:</label>
+                                <input 
+                                    className="form-control"
+                                    placeholder="Golden Retriever"
+                                    type="text"
+                                    value={raza} 
+                                    onChange={(e) => setRaza(e.target.value)} 
+                                />
+                            </div>
 
-            <label>Raza:
-                <input class="form-control form-control-lg"
-                placeholder="Golden Retriever"
-                aria-label=".form-control-lg example"
-                type="text"
-                value={raza} onChange={(e) => setRaza(e.target.value)} />
-            </label>
+                            
+                            <div className="col-md-6">
+                                <label className="form-label fw-semibold">Estado:</label>
+                                <select
+                                    className="form-select"
+                                    value={selectedEstado} 
+                                    onChange={(e) => setEstado(e.target.value)}
+                                >
+                                    <option value="">Sin estado</option>
+                                    {estados.map(e => (
+                                        <option value={e.value} key={e.value}>{e.label}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-            <label>Estado:
-                <select
-                class="form-select"
-                aria-label="Default select example"
-                value={selectedEstado} onChange={(e) => setEstado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
-                    {
-                        estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
+                            
+                            <div className="col-md-4">
+                                <label className="form-label fw-semibold">Tipo Animal:</label>
+                                <select 
+                                    className="form-select"
+                                    value={selectedTipoMascota} 
+                                    onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}
+                                >
+                                    <option value="">Seleccionar</option>
+                                    {tipoMascota.map(e => (
+                                        <option value={e.value} key={e.value}>{e.label}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-            <label>Tipo Animal:
-                <select class="form-select"
-                aria-label="Default select example"
-                value={selectedTipoMascota} onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}>
-                    <option value={""} >Sin estado</option>
-                    {
-                        tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
+                            
+                            <div className="col-md-4">
+                                <label className="form-label fw-semibold">Sexo:</label>
+                                <select 
+                                    className="form-select"
+                                    value={selectedSexo} 
+                                    onChange={(e) => setSexoSeleccionado(e.target.value)}
+                                >
+                                    <option value="">Seleccionar</option>
+                                    {sexo.map(e => (
+                                        <option value={e.value} key={e.value}>{e.label}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-            <label>Sexo:
-                <select class="form-select"
-                aria-label="Default select example"
-                value={selectedSexo} onChange={(e) => setSexoSeleccionado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
-                    {
-                        sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            
-            <label>Tamaño:
-                <select class="form-select"
-                aria-label="Default select example"
-                value={selectedTamano} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
-                    <option value={""} >Sin estado</option>
-                    {
-                        tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
+                            
+                            <div className="col-md-4">
+                                <label className="form-label fw-semibold">Tamaño:</label>
+                                <select 
+                                    className="form-select"
+                                    value={selectedTamano} 
+                                    onChange={(e) => setTamanoSeleccionado(e.target.value)}
+                                >
+                                    <option value="">Seleccionar</option>
+                                    {tamano.map(e => (
+                                        <option value={e.value} key={e.value}>{e.label}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-            <label for="formFile" class="form-label">Imagen:
-                <input class="form-control"
-                type="file"
-                id="formFile"
-                key={fileKey}
-                type="file" onChange={(e) => setImagen(e.target.files[0])} />
-            </label>
+                            
+                            <div className="col-12">
+                                <label className="form-label fw-semibold">Descripción:</label>
+                                <textarea 
+                                    className="form-control"
+                                    rows="3"
+                                    placeholder="Pelaje rubio, juguetón..."
+                                    value={descripcion} 
+                                    onChange={(e) => setDescripcion(e.target.value)}
+                                ></textarea>
+                            </div>
 
-            <button type="submit">{mascota ? "Actualizar" : "Guardar"}</button>
-            
-            {mascota && <button type="button" onClick={onCancel}>Cancelar</button>}
+                            
+                            <div className="col-12">
+                                <label htmlFor="formFile" className="form-label fw-semibold">Imagen:</label>
+                                <input 
+                                    className="form-control"
+                                    type="file"
+                                    id="formFile"
+                                    key={fileKey}
+                                    onChange={(e) => setImagen(e.target.files[0])} 
+                                />
+                            </div>
 
-        </form>
+                            
+                            <div className="col-12 d-flex gap-2 justify-content-end mt-4">
+                                {mascota && (
+                                    <button className="btn btn-outline-secondary" type="button" onClick={onCancel}>
+                                        Cancelar
+                                    </button>
+                                )}
+                                <button className="btn btn-success px-4" type="submit">
+                                    {mascota ? "Actualizar" : "Guardar"}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     )
 }
 

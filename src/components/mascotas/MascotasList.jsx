@@ -54,43 +54,65 @@ function MascotasList({ lista, onAdd, onChange }) {
 
     return (
         <>
-            
-            
-            <h2>Lista mascotas</h2>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary mb-4">
+                <div className="container-fluid">
+                    <span className="navbar-brand h1 m-0">Lista mascotas</span>
+                </div>
+            </nav>
 
-            {error && <p>{error}</p>}
+            {error && <p className="text-danger">{error}</p>}
 
+            
             <MascotasForm onAdd={onAdd} />
 
+            
             {editarMascota && (
                 <MascotasForm
-                key={editarMascota.id}
-                mascota={editarMascota}
-                onUpdate={handleUpdateMascota}
-                onCancel={handleCancelEdit}
+                    key={editarMascota.id}
+                    mascota={editarMascota}
+                    onUpdate={handleUpdateMascota}
+                    onCancel={handleCancelEdit}
                 />
             )}
 
-            {
-                lista.map(m =>
-                (
-                    <div key={m.id}>
-                        <h3>{m.nombre}</h3>
-                        <img src={m.imagen} alt={m.nombre} />
-                        <p>{m.descripcion}</p>
-                        <p>Edad: {m.edad}</p>
-                        <p>Raza: {m.raza}</p>
-                        <Link to={`${m.id}`}>Ver mascota</Link>
-                        <button onClick={() => handleEdit(m)}>Editar</button>
-                        <button onClick={() => handleEliminarMascota(m.id)}>Eliminar</button>
+            
+            <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
+                {lista.map((m) => (
+                    <div className="col" key={m.id}>
+                        <div className="card h-100 shadow-sm border-0">
+                            
+                            {m.imagen && (
+                                <img 
+                                src={m.imagen} 
+                                className="card-img-top" 
+                                alt={m.nombre} 
+                                style={{ height: '280px', objectFit: 'cover' }}
+                            />
+                            )}
 
+                            <div className="card-body">
+                                <h5 className="card-title">{m.nombre}</h5>
+                                <p className="card-text">{m.descripcion}</p>
+                                <p className="card-text mb-1"><small className="text-muted">Edad:</small> {m.edad}</p>
+                                <p className="card-text"><small className="text-muted">Raza:</small> {m.raza}</p>
+                            </div>
+
+                            
+                            <div className="card-footer bg-transparent border-top-0 d-flex justify-content-between gap-2 pb-3">
+                                <Link className="btn btn-outline-info btn-sm" to={`${m.id}`}>
+                                    Ver
+                                </Link>
+                                <button className="btn btn-warning btn-sm" onClick={() => handleEdit(m)}>
+                                    Editar
+                                </button>
+                                <button className="btn btn-danger btn-sm" onClick={() => handleEliminarMascota(m.id)}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                )
-                )
-
-            }
-
-           
+                ))}
+            </div>
         </>
     )
 }
