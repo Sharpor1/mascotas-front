@@ -16,6 +16,7 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     const [selectedSexo, setSexoSeleccionado] = useState("");
     const [selectedTamano, setTamanoSeleccionado] = useState("");
     const [imagen, setImagen] = useState(null);
+    const [fileKey, setFileKey] = useState(0);
 
     const fetchChoices = async () => {
         try {
@@ -34,10 +35,21 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
         fetchChoices();
     }, [])
 
+    const resetForm = () => {
+        setNombre("");
+        setDescripcion("");
+        setEdad("");
+        setRaza("");
+        setEstado("");
+        setTipoMascotaSeleccionada("");
+        setSexoSeleccionado("");
+        setTamanoSeleccionado("");
+        setImagen(null);
+        setFileKey(prev => prev + 1);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(nombre, descripcion, edad, raza, selectedEstado, selectedTipoMascota, selectedSexo, selectedTamano, imagen);
-        console.log(imagen);
         
         const formData = new FormData();
         formData.append("nombre", nombre);
@@ -57,6 +69,7 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
             onCancel();
         } else {
             onAdd(formData);
+            resetForm();
         }
     }
 
@@ -107,7 +120,7 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
                 </select>
             </label>
             <label>Imagen:
-                <input type="file" onChange={(e) => setImagen(e.target.files[0])} />
+                <input key={fileKey} type="file" onChange={(e) => setImagen(e.target.files[0])} />
             </label>
 
             <button type="submit">{mascota ? "Actualizar" : "Guardar"}</button>
