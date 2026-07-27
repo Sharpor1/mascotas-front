@@ -7,14 +7,14 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     const [sexo, setSexo] = useState([]);
     const [tamano, setTamano] = useState([]);
 
-    const [nombre, setNombre] = useState("");
-    const [descripcion, setDescripcion] = useState("");
-    const [edad, setEdad] = useState("");
-    const [raza, setRaza] = useState("");
-    const [selectedEstado, setEstado] = useState("");
-    const [selectedTipoMascota, setTipoMascotaSeleccionada] = useState("");
-    const [selectedSexo, setSexoSeleccionado] = useState("");
-    const [selectedTamano, setTamanoSeleccionado] = useState("");
+    const [nombre, setNombre] = useState(mascota?.nombre ?? "");
+    const [descripcion, setDescripcion] = useState(mascota?.descripcion ?? "");
+    const [edad, setEdad] = useState(mascota?.edad ?? "");
+    const [raza, setRaza] = useState(mascota?.raza ?? "");
+    const [selectedEstado, setEstado] = useState(mascota?.estado ?? "");
+    const [selectedTipoMascota, setTipoMascotaSeleccionada] = useState(mascota?.tipo_animal ?? "");
+    const [selectedSexo, setSexoSeleccionado] = useState(mascota?.sexo ?? "");
+    const [selectedTamano, setTamanoSeleccionado] = useState(mascota?.tamano ?? "");
     const [imagen, setImagen] = useState(null);
     const [fileKey, setFileKey] = useState(0);
 

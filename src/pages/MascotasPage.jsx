@@ -53,7 +53,7 @@ function MascotasPage() {
             <h1>Pagina Mascotas</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas} />
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onChange={fetchMascotas} />
 
             <Outlet />
         </>
