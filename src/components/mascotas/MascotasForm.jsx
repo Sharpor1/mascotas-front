@@ -74,57 +74,94 @@ function MascotasForm({ onAdd, mascota, onUpdate, onCancel }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form class="mb-3" onSubmit={handleSubmit} encType="multipart/form-data">
             <label>Nombre:
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                <input class="form-control form-control-lg"
+                placeholder="Spike"
+                aria-label=".form-control-lg example"
+                type="text"
+                value={nombre} onChange={(e) => setNombre(e.target.value)} />
             </label>
+
             <label>Descripcion:
-                <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
+                <textarea class="form-control form-control-lg"
+                placeholder="Pelaje rubio"
+                aria-label=".form-control-lg example"
+                value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></textarea>
             </label>
+
             <label>Edad:
-                <input type="number" value={edad} onChange={(e) => setEdad(e.target.value)} />
+                <input class="form-control form-control-lg" placeholder="2 años"
+                aria-label=".form-control-lg example"
+                type="number"
+                value={edad} onChange={(e) => setEdad(e.target.value)} />
             </label>
+
             <label>Raza:
-                <input type="text" value={raza} onChange={(e) => setRaza(e.target.value)} />
+                <input class="form-control form-control-lg"
+                placeholder="Golden Retriever"
+                aria-label=".form-control-lg example"
+                type="text"
+                value={raza} onChange={(e) => setRaza(e.target.value)} />
             </label>
+
             <label>Estado:
-                <select value={selectedEstado} onChange={(e) => setEstado(e.target.value)}>
+                <select
+                class="form-select"
+                aria-label="Default select example"
+                value={selectedEstado} onChange={(e) => setEstado(e.target.value)}>
                     <option value={""} >Sin estado</option>
                     {
                         estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
                 </select>
             </label>
+
             <label>Tipo Animal:
-                <select value={selectedTipoMascota} onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}>
+                <select class="form-select"
+                aria-label="Default select example"
+                value={selectedTipoMascota} onChange={(e) => setTipoMascotaSeleccionada(e.target.value)}>
                     <option value={""} >Sin estado</option>
                     {
                         tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
                 </select>
             </label>
+
             <label>Sexo:
-                <select value={selectedSexo} onChange={(e) => setSexoSeleccionado(e.target.value)}>
+                <select class="form-select"
+                aria-label="Default select example"
+                value={selectedSexo} onChange={(e) => setSexoSeleccionado(e.target.value)}>
                     <option value={""} >Sin estado</option>
                     {
                         sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
                 </select>
             </label>
+            
             <label>Tamaño:
-                <select value={selectedTamano} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
+                <select class="form-select"
+                aria-label="Default select example"
+                value={selectedTamano} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
                     <option value={""} >Sin estado</option>
                     {
                         tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
                 </select>
             </label>
-            <label>Imagen:
-                <input key={fileKey} type="file" onChange={(e) => setImagen(e.target.files[0])} />
+
+            <label for="formFile" class="form-label">Imagen:
+                <input class="form-control"
+                type="file"
+                id="formFile"
+                key={fileKey}
+                type="file" onChange={(e) => setImagen(e.target.files[0])} />
             </label>
 
             <button type="submit">{mascota ? "Actualizar" : "Guardar"}</button>
+            
             {mascota && <button type="button" onClick={onCancel}>Cancelar</button>}
+
         </form>
     )
 }

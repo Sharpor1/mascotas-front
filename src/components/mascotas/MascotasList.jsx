@@ -54,6 +54,8 @@ function MascotasList({ lista, onAdd, onChange }) {
 
     return (
         <>
+            
+            
             <h2>Lista mascotas</h2>
 
             {error && <p>{error}</p>}
@@ -87,6 +89,7 @@ function MascotasList({ lista, onAdd, onChange }) {
                 )
 
             }
+
            
         </>
     )
